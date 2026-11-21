@@ -57,6 +57,7 @@ try(df \%>\% add_column(z = 1:5))
 }
 \seealso{
 Other addition:
-\code{\link[=add_row]{add_row()}}
+\code{\link[=add_row]{add_row()}},
+\code{\link[=merge_rows]{merge_rows()}}
 }
 \concept{addition}

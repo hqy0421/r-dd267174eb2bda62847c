@@ -439,7 +439,9 @@ abort_merge_op_not_character <- function(col, call = caller_env()) {
   tibble_abort(
     call = call,
     paste0(
-      "The operation column ", tick(col), " must be a character vector."
+      "The operation column ",
+      tick(col),
+      " must be a character vector."
     )
   )
 }
@@ -456,7 +458,12 @@ abort_merge_op_invalid <- function(value, row, call = caller_env()) {
     call = call,
     bullets(
       paste0("Invalid operation in row ", row, " of `.changes`:"),
-      x = paste0(tick(value), " is not one of ", paste(merge_valid_ops, collapse = ", "), ".")
+      x = paste0(
+        tick(value),
+        " is not one of ",
+        paste(merge_valid_ops, collapse = ", "),
+        "."
+      )
     ),
     row = row
   )
@@ -466,7 +473,9 @@ abort_merge_cols_not_list <- function(col, call = caller_env()) {
   tibble_abort(
     call = call,
     paste0(
-      "The column-list column ", tick(col), " must be a list column."
+      "The column-list column ",
+      tick(col),
+      " must be a list column."
     )
   )
 }
@@ -486,7 +495,11 @@ abort_merge_cols_invalid <- function(row, call = caller_env()) {
 abort_merge_cols_na <- function(row, call = caller_env()) {
   tibble_abort(
     call = call,
-    paste0("`.cols` must not contain missing column names, see row ", row, " of `.changes`."),
+    paste0(
+      "`.cols` must not contain missing column names, see row ",
+      row,
+      " of `.changes`."
+    ),
     row = row
   )
 }
@@ -494,7 +507,11 @@ abort_merge_cols_na <- function(row, call = caller_env()) {
 abort_merge_cols_duplicate <- function(row, call = caller_env()) {
   tibble_abort(
     call = call,
-    paste0("`.cols` must not contain duplicate column names, see row ", row, " of `.changes`."),
+    paste0(
+      "`.cols` must not contain duplicate column names, see row ",
+      row,
+      " of `.changes`."
+    ),
     row = row
   )
 }
@@ -503,7 +520,11 @@ abort_merge_cols_unknown <- function(row, names, call = caller_env()) {
   tibble_abort(
     call = call,
     problems(
-      paste0("Unknown column name(s) in `.cols` in row ", row, " of `.changes`:"),
+      paste0(
+        "Unknown column name(s) in `.cols` in row ",
+        row,
+        " of `.changes`:"
+      ),
       msg_unknown_column_names(names)
     ),
     row = row,
@@ -515,7 +536,11 @@ abort_merge_cols_absent <- function(row, names, call = caller_env()) {
   tibble_abort(
     call = call,
     problems(
-      paste0("Column name(s) listed in `.cols` are missing from `.changes`, see row ", row, ":"),
+      paste0(
+        "Column name(s) listed in `.cols` are missing from `.changes`, see row ",
+        row,
+        ":"
+      ),
       msg_unknown_column_names(names)
     ),
     row = row,

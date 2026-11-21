@@ -38,8 +38,7 @@ A tibble with the same column order and column types as
 delete operations carried by a staging tibble to a main table.
 The rows of \code{.changes} are processed in arrival order, and the same
 business key may appear in several rows.
-}
-\details{
+
 The main table is identified by a composite business key (\code{.by}).
 Key values must be unique in \code{.data}, and no key component may be
 missing, neither in \code{.data} nor in \code{.changes}.

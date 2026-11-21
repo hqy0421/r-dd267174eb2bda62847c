@@ -76,16 +76,22 @@ test_that("updates keep unlisted columns and honour explicit missing values", {
   main <- tibble(id = 1L, v = 5, w = "kept")
 
   keep <- tibble(
-    id = 1L, .op = "update", .cols = list(character(0)),
-    v = NA_real_, w = NA_character_
+    id = 1L,
+    .op = "update",
+    .cols = list(character(0)),
+    v = NA_real_,
+    w = NA_character_
   )
   out <- merge_rows(main, keep, .by = "id")
   expect_identical(out$v, 5)
   expect_identical(out$w, "kept")
 
   overwrite <- tibble(
-    id = 1L, .op = "update", .cols = list("v"),
-    v = NA_real_, w = NA_character_
+    id = 1L,
+    .op = "update",
+    .cols = list("v"),
+    v = NA_real_,
+    w = NA_character_
   )
   out <- merge_rows(main, overwrite, .by = "id")
   expect_true(is.na(out$v))
@@ -110,7 +116,9 @@ test_that("the same key may appear multiple times across operations", {
 test_that("an empty batch returns an unchanged tibble", {
   main <- tibble(id = 1:3, v = c("a", "b", "c"))
   empty <- tibble(
-    id = integer(0), .op = character(0), .cols = list(),
+    id = integer(0),
+    .op = character(0),
+    .cols = list(),
     v = character(0)
   )
   expect_identical(merge_rows(main, empty, .by = "id"), main)
@@ -119,8 +127,10 @@ test_that("an empty batch returns an unchanged tibble", {
 test_that("inserts work against an empty main table", {
   main <- tibble(id = integer(0), v = numeric(0))
   staging <- tibble(
-    id = 1:2, .op = c("insert", "insert"),
-    .cols = list("v", "v"), v = c(1.5, 2.5)
+    id = 1:2,
+    .op = c("insert", "insert"),
+    .cols = list("v", "v"),
+    v = c(1.5, 2.5)
   )
   out <- merge_rows(main, staging, .by = "id")
   expect_identical(out$id, 1:2)
@@ -171,8 +181,11 @@ test_that("custom operation and column-list names are supported", {
     v = c(42, 7)
   )
   out <- merge_rows(
-    main, staging, .by = "id",
-    .op = "action", .cols = "supplied"
+    main,
+    staging,
+    .by = "id",
+    .op = "action",
+    .cols = "supplied"
   )
   expect_identical(out$v, c(42, 2, 7))
 })
@@ -232,7 +245,12 @@ test_that("missing and duplicate keys are rejected", {
   expect_error(
     merge_rows(
       tibble(id = 1L, v = 1),
-      tibble(id = NA_integer_, .op = "insert", .cols = list(character(0)), v = 1),
+      tibble(
+        id = NA_integer_,
+        .op = "insert",
+        .cols = list(character(0)),
+        v = 1
+      ),
       .by = "id"
     ),
     "row 1",
@@ -357,7 +375,8 @@ test_that("staging columns and key arguments are validated", {
     merge_rows(
       main,
       tibble(id = 1L, .op = "x", .cols = list(character(0)), v = 1),
-      .by = "id", .op = "id"
+      .by = "id",
+      .op = "id"
     ),
     class = "tibble_error_merge_control_conflict"
   )
@@ -373,7 +392,8 @@ test_that("staging columns and key arguments are validated", {
     merge_rows(
       main,
       tibble(id = 1L, .op = "x", .cols = list(character(0)), v = 1),
-      .by = "id", .op = c("a", "b")
+      .by = "id",
+      .op = c("a", "b")
     ),
     class = "tibble_error_merge_control_not_string"
   )
